@@ -1,5 +1,6 @@
 # macstats
-OSX Stats GUI Tool - Battery Info and CPU Temperature
+OSX Stats Tool with GUI
+CPU temperature, fan speeds and battery information
 
 ## Download
 You can download macstats by clicking [here](https://github.com/daryalmurat/macstats/releases/download/v0.9-beta.1/macstats.zip)
