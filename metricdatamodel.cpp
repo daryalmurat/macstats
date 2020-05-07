@@ -20,8 +20,9 @@ void MetricDataModel::startDataFetch()
     this->addMetric(new Metric(QString("Battery Level"), QString("Battery Level"), QString("-")));
     this->addMetric(new Metric(QString("Battery Health"), QString("Battery Health"), QString("-")));
     this->addMetric(new Metric(QString("Cycle Count / Max Cycles"), QString("Cycle Count / Max Cycles"), QString("-")));
+    this->addMetric(new Metric(QString("Current Charge / Max Charge"), QString("Current Charge / Max Charge"), QString("-")));
 
-    m_timer->start(100);
+    m_timer->start(500);
 }
 
 void MetricDataModel::addMetric(Metric *metric)
@@ -53,19 +54,22 @@ void MetricDataModel::updateSMCData()
 {
     int index = 0;
     double temperature = m_smcProxy.readCPUTemperature();
-    this->m_data[index++]->setValue(QString::number(temperature));
+    this->m_data[index++]->setValue(QString::number(temperature)+QString("°C"));
 
     QVector<int> fanSpeeds = m_smcProxy.readFanSpeeds();
     for(int i=0;i<fanSpeeds.size();i++){
-        this->m_data[index++]->setValue(QString::number(fanSpeeds.at(i)));
+        this->m_data[index++]->setValue(QString::number(fanSpeeds.at(i))+QString(" RPM"));
     }
 
     int batteryChargeLevel = m_smcProxy.readBatteryChargeLevel();
-    this->m_data[index++]->setValue(QString::number(batteryChargeLevel));
+    this->m_data[index++]->setValue(QString::number(batteryChargeLevel)+QString("%"));
     QString batteryHealth = m_smcProxy.readBatteryHealth();
     this->m_data[index++]->setValue(batteryHealth);
     QVector<int> cycleCountData = m_smcProxy.readBatteryCycleCountInfo();
     this->m_data[index++]->setValue(QString::number(cycleCountData.at(0))+"/"+QString::number(cycleCountData.at(1)));
+    QVector<int> chargeLevels = m_smcProxy.readBatteryChargeLevels();
+    this->m_data[index++]->setValue(QString::number(chargeLevels.at(0))+"/"+QString::number(chargeLevels.at(1)));
+
 
     emit dataChanged(this->index(0),this->index(m_data.size()-1));
 }

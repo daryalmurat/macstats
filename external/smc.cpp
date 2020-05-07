@@ -335,3 +335,39 @@ int SMCGetBatteryCharge() {
 
     return charge;
 }
+
+int SMCGetBatteryMaxChargeCapacity()
+{
+    CFNumberRef maximumCapacity;
+    int iMaximumCapacity;
+
+    CFDictionaryRef powerSourceInformation;
+
+    powerSourceInformation = powerSourceInfo(0);
+    if (powerSourceInformation == NULL)
+        return 0;
+
+    maximumCapacity = (CFNumberRef)CFDictionaryGetValue(powerSourceInformation, CFSTR(kIOPSMaxCapacityKey));
+
+    CFNumberGetValue(maximumCapacity, kCFNumberIntType, &iMaximumCapacity);
+    return iMaximumCapacity;
+}
+
+int SMCGetBatteryCurrentChargeCapacity()
+{
+    CFNumberRef currentCapacity;
+
+    int iCurrentCapacity;
+
+    CFDictionaryRef powerSourceInformation;
+
+    powerSourceInformation = powerSourceInfo(0);
+    if (powerSourceInformation == NULL)
+        return 0;
+
+    currentCapacity = (CFNumberRef)CFDictionaryGetValue(powerSourceInformation, CFSTR(kIOPSCurrentCapacityKey));
+
+    CFNumberGetValue(currentCapacity, kCFNumberIntType, &iCurrentCapacity);
+
+    return iCurrentCapacity;
+}

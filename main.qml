@@ -38,31 +38,22 @@ Window {
                     // render data from model
                     text: name
                     Layout.fillWidth: true
-                    Layout.minimumWidth: 140
-                    Layout.preferredWidth: 140
-                    Layout.maximumWidth: 140
+                    Layout.minimumWidth: 270
+                    Layout.preferredWidth: 270
+                    Layout.maximumWidth: 270
 
 
                 }
-                TextField {
 
-                    color: "#fff"
-                    background: Item {}
-                    // render data from model
-                    text: displayName
-                    Layout.minimumWidth: 180
-                    Layout.preferredWidth: 180
-                    Layout.maximumWidth: 180
-                }
                 TextField {
 
                     color: "#fff"
                     background: Item {}
                     // render data from model
                     text: value
-                    Layout.minimumWidth: 80
-                    Layout.preferredWidth: 80
-                    Layout.maximumWidth: 80
+                    Layout.minimumWidth: 150
+                    Layout.preferredWidth: 150
+                    Layout.maximumWidth: 150
                 }
 
             }

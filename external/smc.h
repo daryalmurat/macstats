@@ -106,6 +106,8 @@ double SMCGetTemperature(char *key);
 const char* SMCGetBatteryHealth();
 int SMCGetDesignCycleCount();
 int SMCGetBatteryCharge();
+int SMCGetBatteryMaxChargeCapacity();
+int SMCGetBatteryCurrentChargeCapacity();
 kern_return_t SMCOpen(void);
 kern_return_t SMCClose();
 
